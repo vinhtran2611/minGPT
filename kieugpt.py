@@ -95,13 +95,11 @@ if __name__ == '__main__':
     # construct the training dataset
     text = open('truyenkieu.txt', 'r', encoding='utf-8').read() # don't worry we won't run out of file handles
     train_dataset = CharDataset(config.data, text)
-    print(train_dataset.itos)
-    print(train_dataset.stoi)
 
     # construct the model
     config.model.vocab_size = train_dataset.get_vocab_size()
     config.model.block_size = train_dataset.get_block_size()
-    model = GPT(config.model)
+    model = GPT.from_pretrained("NlpHUST/gpt2-vietnamese")
 
     # construct the trainer object
     trainer = Trainer(config.trainer, model, train_dataset)
